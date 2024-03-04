@@ -10,5 +10,9 @@ crate-type = ["cdylib"]
 
 [dependencies]
 candid = "0.10"
-ic-cdk = "0.12"
-ic-cdk-timers = "0.6" # Feel free to remove this dependency if you don't need timers
+ic-cdk = "0.13.1"
+
+canister_sig_util = { git = "https://github.com/dfinity/internet-identity.git" }
+internet_identity_interface = { git = "https://github.com/dfinity/internet-identity.git" }
+vc_util = { git = "https://github.com/dfinity/internet-identity.git" }
+asset_util = { git = "https://github.com/dfinity/internet-identity.git" }

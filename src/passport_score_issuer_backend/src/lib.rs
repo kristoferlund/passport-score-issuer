@@ -1,4 +1,3 @@
-#[ic_cdk::query]
-fn greet(name: String) -> String {
-    format!("Hello, {}!", name)
-}
+mod service;
+
+const CREDENTIAL_TYPE: &str = "GitCoinPassportScore";
