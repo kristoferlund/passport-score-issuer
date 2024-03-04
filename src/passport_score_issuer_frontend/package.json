@@ -15,9 +15,13 @@
     "react-dom": "^18.2.0",
     "@dfinity/agent": "^0.15.7",
     "@dfinity/candid": "^0.15.7",
-    "@dfinity/principal": "^0.15.7"
+    "@dfinity/principal": "^0.15.7",
+    "@dfinity/utils": "^2.1.2",
+    "ic-use-internet-identity": "^0.0.7",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/node": "^20.11.24",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
     "@vitejs/plugin-react": "^4.0.1",

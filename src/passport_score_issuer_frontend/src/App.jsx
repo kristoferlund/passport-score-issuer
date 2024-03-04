@@ -17,7 +17,11 @@ function App() {
         fontFamily: "sans-serif",
       }}
     >
-      <img src="/logo2.svg" alt="DFINITY logo" style={{ width: "300px" }} />
+      <img
+        src="/logo.svg"
+        alt="The Internet Computer"
+        style={{ width: "300px" }}
+      />
       {identity ? (
         <>
           You are logged in as: {identity.getPrincipal().toText().slice(0, 5)}

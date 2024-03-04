@@ -14,13 +14,5 @@
   "type": "module",
   "workspaces": [
     "src/passport_score_issuer_frontend"
-  ],
-  "dependencies": {
-    "@dfinity/utils": "^2.1.2",
-    "ic-use-internet-identity": "^0.0.7",
-    "zod": "^3.22.4"
-  },
-  "devDependencies": {
-    "@types/node": "^20.11.24"
-  }
+  ]
 }
