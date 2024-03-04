@@ -11,16 +11,22 @@
       },
       "frontend": {}
     },
-    "passport_score_issuer_backend": {
-      "candid": "src/passport_score_issuer_backend/passport_score_issuer_backend.did",
-      "package": "passport_score_issuer_backend",
+    "issuer_backend": {
+      "candid": "packages/issuer_backend/issuer_backend.did",
+      "package": "issuer_backend",
       "type": "rust"
     },
-    "passport_score_issuer_frontend": {
-      "dependencies": ["passport_score_issuer_backend"],
-      "source": ["src/passport_score_issuer_frontend/dist"],
+    "issuer_frontend": {
+      "dependencies": ["issuer_backend", "internet_identity"],
+      "source": ["packages/issuer_frontend/dist"],
       "type": "assets",
-      "workspace": "passport_score_issuer_frontend"
+      "workspace": "issuer_frontend"
+    },
+    "demo_app": {
+      "dependencies": ["internet_identity"],
+      "source": ["packages/demo_app/dist"],
+      "type": "assets",
+      "workspace": "demo_app"
     }
   },
   "defaults": {

@@ -1688,6 +1688,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "issuer_backend"
+version = "0.1.0"
+dependencies = [
+ "asset_util",
+ "candid",
+ "canister_sig_util",
+ "ic-cdk 0.13.1",
+ "internet_identity_interface",
+ "vc_util",
+]
+
+[[package]]
 name = "itertools"
 version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1978,18 +1990,6 @@ dependencies = [
  "redox_syscall",
  "smallvec",
  "windows-targets 0.48.5",
-]
-
-[[package]]
-name = "passport_score_issuer_backend"
-version = "0.1.0"
-dependencies = [
- "asset_util",
- "candid",
- "canister_sig_util",
- "ic-cdk 0.13.1",
- "internet_identity_interface",
- "vc_util",
 ]
 
 [[package]]

@@ -1,13 +1,12 @@
 {
-  "name": "passport_score_issuer_frontend",
+  "name": "demo_app",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "setup": "npm i && dfx canister create passport_score_issuer_backend && dfx generate passport_score_issuer_backend && dfx deploy",
     "start": "vite --port 3000",
-    "prebuild": "dfx generate",
-    "build": "tsc && vite build",
+    "prebuild": "npm i && dfx canister create demo_app && dfx generate demo_app",
+    "build": "npm run prebuild && tsc && vite build",
     "format": "prettier --write \"src/**/*.{json,js,jsx,ts,tsx,css,scss}\""
   },
   "dependencies": {
