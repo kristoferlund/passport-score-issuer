@@ -1,0 +1,34 @@
+{
+  "canisters": {
+    "internet_identity": {
+      "type": "custom",
+      "candid": "https://github.com/dfinity/internet-identity/releases/download/release-2024-03-01/internet_identity.did",
+      "wasm": "https://github.com/dfinity/internet-identity/releases/download/release-2024-03-01/internet_identity_dev.wasm.gz",
+      "remote": {
+        "id": {
+          "ic": "rdmx6-jaaaa-aaaaa-aaadq-cai"
+        }
+      },
+      "frontend": {}
+    },
+    "passport_score_issuer_backend": {
+      "candid": "src/passport_score_issuer_backend/passport_score_issuer_backend.did",
+      "package": "passport_score_issuer_backend",
+      "type": "rust"
+    },
+    "passport_score_issuer_frontend": {
+      "dependencies": ["passport_score_issuer_backend"],
+      "source": ["src/passport_score_issuer_frontend/dist"],
+      "type": "assets",
+      "workspace": "passport_score_issuer_frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
