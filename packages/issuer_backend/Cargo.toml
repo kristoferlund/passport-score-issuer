@@ -9,6 +9,7 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
+ic-stable-structures = "0.6.3"
 candid = "0.10"
 ic-cdk = "0.13.1"
 canister_sig_util = { git = "https://github.com/dfinity/internet-identity.git" }

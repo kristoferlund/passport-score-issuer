@@ -12,11 +12,11 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "@dfinity/agent": "^0.15.7",
-    "@dfinity/candid": "^0.15.7",
-    "@dfinity/principal": "^0.15.7",
+    "@dfinity/agent": "^1.0.1",
+    "@dfinity/candid": "^1.0.1",
+    "@dfinity/principal": "^1.0.1",
     "@dfinity/utils": "^2.1.2",
-    "ic-use-internet-identity": "^0.0.7",
+    "ic-use-internet-identity": "^0.0.8",
     "zod": "^3.22.4"
   },
   "devDependencies": {

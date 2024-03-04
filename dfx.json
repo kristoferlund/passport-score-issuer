@@ -9,23 +9,35 @@
           "ic": "rdmx6-jaaaa-aaaaa-aaadq-cai"
         }
       },
-      "frontend": {}
+      "frontend": {},
+      "declarations": {
+        "output": "declarations/internet_identity/"
+      }
     },
     "issuer_backend": {
       "candid": "packages/issuer_backend/issuer_backend.did",
       "package": "issuer_backend",
-      "type": "rust"
+      "type": "rust",
+      "declarations": {
+        "output": "declarations/issuer_backend"
+      }
     },
     "issuer_frontend": {
       "dependencies": ["issuer_backend", "internet_identity"],
       "source": ["packages/issuer_frontend/dist"],
       "type": "assets",
+      "declarations": {
+        "output": "declarations/issuer_frontend"
+      },
       "workspace": "issuer_frontend"
     },
     "demo_app": {
       "dependencies": ["internet_identity"],
       "source": ["packages/demo_app/dist"],
       "type": "assets",
+      "declarations": {
+        "output": "declarations/demo_app"
+      },
       "workspace": "demo_app"
     }
   },
