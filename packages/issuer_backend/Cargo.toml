@@ -16,3 +16,6 @@ canister_sig_util = { git = "https://github.com/dfinity/internet-identity.git" }
 internet_identity_interface = { git = "https://github.com/dfinity/internet-identity.git" }
 vc_util = { git = "https://github.com/dfinity/internet-identity.git" }
 asset_util = { git = "https://github.com/dfinity/internet-identity.git" }
+k256 = "0.13.3"
+tiny-keccak = { version = "2.0.2", features = ["keccak"] }
+hex = "0.4.3"

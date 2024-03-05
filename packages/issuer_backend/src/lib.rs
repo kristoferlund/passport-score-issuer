@@ -1,3 +1,4 @@
+mod eth;
 mod service;
 
 use ic_stable_structures::memory_manager::{MemoryId, MemoryManager, VirtualMemory};
