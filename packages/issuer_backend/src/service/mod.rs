@@ -1,3 +1,4 @@
+mod create_credential;
+mod lookup_credential;
 mod prepare_credential;
-mod register_address;
 mod vc_consent_message;

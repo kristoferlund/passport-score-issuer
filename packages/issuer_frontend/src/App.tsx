@@ -1,39 +1,49 @@
-import { LoginButton } from "./components/LoginButton";
+import "./styles/global.css";
+
+import CredentialSection from "./components/CredentialSection";
+import { EthLoginButton } from "./components/EthLoginButton";
+import EthPill from "./components/EthPill";
+import { IcpLoginButton } from "./components/IcpLoginButton";
+import IcpPill from "./components/IcpPill";
+import { Toaster } from "react-hot-toast";
+import { useAccount } from "wagmi";
 import { useInternetIdentity } from "ic-use-internet-identity";
-import { usePassportScore } from "./passport/PassportProvider";
 
 function App() {
   const { identity } = useInternetIdentity();
-  const { startVcFlow } = usePassportScore();
+  const { address } = useAccount();
 
   return (
-    <main
-      style={{
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        gap: "20px",
-        alignItems: "center",
-        fontFamily: "sans-serif",
-      }}
-    >
+    <main className="col">
       <img
-        src="/logo.svg"
+        src="/header.svg"
         alt="The Internet Computer"
         style={{ width: "300px" }}
       />
-      Issuer!
-      {identity ? (
-        <>
-          You are logged in as: {identity.getPrincipal().toText().slice(0, 5)}
-          ...{identity.getPrincipal().toText().slice(-5)}
-          <button onClick={startVcFlow} style={{ display: "block" }}>
-            Issue Passport
-          </button>
-        </>
-      ) : (
-        <LoginButton />
+      <h1>Gitcoin Passport issuer for ICP</h1>
+      <div style={{ textAlign: "center" }}>
+        This issuer links your Ethereum address and Gitcoin Passport Score to
+        your ICP identity. The issued credential can be used to prove your
+        Gitcoin Passport Score to other ICP services in a secure way, without
+        revealing your Ethereum address.
+      </div>
+      {!identity && !address && (
+        <div style={{ textAlign: "center", fontWeight: "700" }}>
+          Login to ICP and connect to ETH to view or create a passport
+          credential.
+        </div>
       )}
+
+      <div className="row">
+        <IcpPill />
+        <IcpLoginButton />
+      </div>
+      <div className="row">
+        <EthPill />
+        <EthLoginButton />
+      </div>
+      {identity && address && <CredentialSection />}
+      <Toaster />
     </main>
   );
 }

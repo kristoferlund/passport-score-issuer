@@ -65,7 +65,26 @@ type DerivationOriginError = variant {
   UnsupportedOrigin : text;
 };
 
+
+type Score = float32;
+
+type LookupCredentialResponse = variant {
+  Ok : Score;
+  Err : text;
+};
+
+type Address = text;
+type Signature = text;
+
+type RegisterCredentialResponse = variant {
+  Ok : Score;
+  Err : text;
+};
+
 service: {
+    lookup_credential: (Address) -> (LookupCredentialResponse) query;
+    create_credential: (Address, Signature) -> (RegisterCredentialResponse);
+
     derivation_origin : (DerivationOriginRequest) ->
         (variant {Ok: DerivationOriginData; Err: DerivationOriginError});
     vc_consent_message : (Icrc21VcConsentMessageRequest) ->

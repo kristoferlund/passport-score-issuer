@@ -90,6 +90,15 @@ impl EthAddress {
         array.copy_from_slice(&bytes);
         array
     }
+
+    pub fn as_hash(&self) -> [u8; 32] {
+        let bytes = self.as_byte_array();
+        let mut keccak256 = [0; 32];
+        let mut hasher = Keccak::v256();
+        hasher.update(&bytes);
+        hasher.finalize(&mut keccak256);
+        keccak256
+    }
 }
 
 /// Represents an Ethereum signature with validation.

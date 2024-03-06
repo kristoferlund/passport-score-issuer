@@ -32,7 +32,7 @@
       "workspace": "issuer_frontend"
     },
     "demo_app": {
-      "dependencies": ["internet_identity"],
+      "dependencies": ["issuer_backend", "internet_identity"],
       "source": ["packages/demo_app/dist"],
       "type": "assets",
       "declarations": {
