@@ -4,9 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "setup": "npm i && dfx canister create issuer_frontend && dfx generate issuer_frontend && dfx deploy",
     "start": "vite --port 3000",
-    "prebuild": "npm i && dfx canister create issuer_frontend && dfx generate issuer_frontend",
-    "build": "npm run prebuild && tsc && vite build",
+    "prebuild": "dfx generate",
+    "build": "tsc && vite build",
     "format": "prettier --write \"src/**/*.{json,js,jsx,ts,tsx,css,scss}\""
   },
   "dependencies": {
@@ -16,7 +17,7 @@
     "@dfinity/utils": "^2.1.2",
     "@tanstack/react-query": "^5.25.0",
     "ic-use-actor": "^0.0.9",
-    "ic-use-internet-identity": "^0.0.8",
+    "ic-use-internet-identity": "^0.0.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",

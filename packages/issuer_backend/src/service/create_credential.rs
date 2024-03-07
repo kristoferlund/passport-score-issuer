@@ -55,13 +55,15 @@ pub fn create_credential(signature: String, address: String) -> Result<f32, Stri
         return Err("Invalid signature".to_string());
     }
 
-    ETH_PRINCIPAL.with_borrow_mut(|e| {
-        e.insert(address.as_hash(), principal);
-    });
+    // ETH_PRINCIPAL.with_borrow_mut(|e| {
+    //     e.insert(address.as_hash(), principal);
+    // });
 
-    PRINCIPAL_SCORE.with_borrow_mut(|s| {
-        s.insert(principal, 15.0); // Dummy score for now
-    });
+    // PRINCIPAL_SCORE.with_borrow_mut(|s| {
+    //     s.insert(principal, 15.0); // Dummy score for now
+    // });
 
-    Ok(15.0)
+    // Ok(15.0)
+
+    Err("Saving to the registry is not yet implemented".to_string())
 }

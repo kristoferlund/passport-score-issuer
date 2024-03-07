@@ -17,10 +17,7 @@ start-demo-app:
 	@npm --workspace demo_app run start
 
 deploy-all: 
-	@$(MAKE) create-canisters
-	@$(MAKE) deploy-issuer-backend
-	@$(MAKE) deploy-issuer-frontend
-	@$(MAKE) deploy-demo-app
+	@dfx deploy
 	@echo ""
 	@echo "Deployment Complete."
 	@echo ""

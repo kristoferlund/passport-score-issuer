@@ -1,5 +1,3 @@
-import "./styles/global.css";
-
 import CredentialSection from "./components/CredentialSection";
 import { EthLoginButton } from "./components/EthLoginButton";
 import EthPill from "./components/EthPill";

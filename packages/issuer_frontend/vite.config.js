@@ -13,11 +13,14 @@ process.env.II_URL =
     : `https://identity.ic0.app`;
 
 export default defineConfig({
-  define: {
-    global: "window",
-  },
   build: {
     emptyOutDir: true,
+    rollupOptions: {
+      external: [
+        "@safe-window/safe-apps-provider",
+        "@safe-window/safe-apps-sdk",
+      ],
+    },
   },
   optimizeDeps: {
     esbuildOptions: {

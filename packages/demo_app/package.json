@@ -4,9 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "vite --port 3000",
-    "prebuild": "npm i && dfx canister create demo_app && dfx generate demo_app",
-    "build": "npm run prebuild && tsc && vite build",
+    "setup": "npm i && dfx canister create demo_app && dfx generate demo_app && dfx deploy",
+    "start": "vite --port 3001",
+    "prebuild": "dfx generate",
+    "build": "tsc && vite build",
     "format": "prettier --write \"src/**/*.{json,js,jsx,ts,tsx,css,scss}\""
   },
   "dependencies": {
@@ -16,7 +17,7 @@
     "@dfinity/candid": "^1.0.1",
     "@dfinity/principal": "^1.0.1",
     "@dfinity/utils": "^2.1.2",
-    "ic-use-internet-identity": "^0.0.8",
+    "ic-use-internet-identity": "^0.0.9",
     "zod": "^3.22.4"
   },
   "devDependencies": {
