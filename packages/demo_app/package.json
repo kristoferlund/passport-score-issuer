@@ -17,7 +17,7 @@
     "@dfinity/candid": "^1.0.1",
     "@dfinity/principal": "^1.0.1",
     "@dfinity/utils": "^2.1.2",
-    "ic-use-internet-identity": "^0.0.9",
+    "ic-use-internet-identity": "^0.0.10",
     "zod": "^3.22.4"
   },
   "devDependencies": {

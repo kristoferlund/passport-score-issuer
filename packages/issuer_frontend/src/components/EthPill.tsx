@@ -1,13 +1,22 @@
+import { getAccount } from "@wagmi/core";
 import { useAccount } from "wagmi";
+import { useEffect } from "react";
 
 export default function EthPill() {
-  const { address } = useAccount();
+  const account = useAccount();
 
-  if (!address) return null;
+  if (!account.address) return null;
+
+  if (account.chainId !== 1)
+    return (
+      <div className="pill" style={{ fontSize: "12px" }}>
+        Wrong network
+      </div>
+    );
 
   return (
     <div className="pill">
-      {address.slice(0, 5)}...{address.slice(-5)}
+      {account.address.slice(0, 5)}...{account.address.slice(-5)}
     </div>
   );
 }
