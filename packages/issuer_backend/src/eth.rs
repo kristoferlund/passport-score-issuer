@@ -77,7 +77,7 @@ impl EthAddress {
     }
 
     /// Converts the Ethereum address into a byte vector.
-    pub fn as_bytes(&self) -> Vec<u8> {
+    pub fn _as_bytes(&self) -> Vec<u8> {
         let address = self.0.strip_prefix("0x").unwrap();
         hex::decode(address).unwrap()
     }
@@ -127,7 +127,7 @@ impl EthSignature {
     }
 
     /// Returns a string slice of the Ethereum signature.
-    pub fn as_str(&self) -> &str {
+    pub fn _as_str(&self) -> &str {
         &self.0
     }
 
@@ -138,7 +138,7 @@ impl EthSignature {
     }
 
     /// Converts the Ethereum signature into a byte array.
-    pub fn as_byte_array(&self) -> [u8; 65] {
+    pub fn _as_byte_array(&self) -> [u8; 65] {
         let signature = self.0.strip_prefix("0x").unwrap();
         let bytes = hex::decode(signature).unwrap();
         let mut array = [0; 65];
@@ -214,7 +214,7 @@ pub fn eip191_bytes(message: &str) -> Vec<u8> {
 /// # Parameters
 ///
 /// * `bytes` - The byte array to convert. Must be 20 bytes long.
-pub fn bytes_to_eth_address(bytes: &[u8; 20]) -> String {
+pub fn _bytes_to_eth_address(bytes: &[u8; 20]) -> String {
     // Encode the bytes to a hexadecimal string
     let addr = hex::encode(bytes);
 
