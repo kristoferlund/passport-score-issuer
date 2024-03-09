@@ -58,7 +58,7 @@ export default function CredentialBox() {
     <div className="col">
       <div className="score">–</div>
       <button onClick={register}>
-        {isCreating ? "Creating credential …" : "Create credential"}
+        {isCreating ? "Creating …" : "Create credential"}
       </button>
     </div>
   );

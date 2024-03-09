@@ -8,7 +8,7 @@ export function EthLoginButton() {
   const { disconnect } = useDisconnect();
   const { switchChain } = useSwitchChain();
 
-  if (account.chainId !== 1) {
+  if (account.isConnected && account.chainId !== 1) {
     return (
       <button
         onClick={() => switchChain({ chainId: 1 })}

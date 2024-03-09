@@ -17,7 +17,7 @@ export default function CredentialSection() {
       <h2>Credential – Gitcoin Passport Score</h2>
       <div className="credential">
         {credentialResponse && "Ok" in credentialResponse ? (
-          <div className="score">{credentialResponse.Ok}</div>
+          <div className="score">{credentialResponse.Ok.toFixed(2)}</div>
         ) : (
           <CredentialBox />
         )}

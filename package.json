@@ -13,6 +13,7 @@
   },
   "type": "module",
   "workspaces": [
-    "packages/issuer_frontend"
+    "packages/issuer_frontend",
+    "packages/demo_app"
   ]
 }
