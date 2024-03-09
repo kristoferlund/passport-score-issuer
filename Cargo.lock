@@ -1714,6 +1714,7 @@ dependencies = [
  "ic-stable-structures 0.6.3",
  "internet_identity_interface",
  "k256",
+ "serde_json",
  "tiny-keccak",
  "vc_util",
 ]

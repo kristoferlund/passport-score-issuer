@@ -1,3 +1,4 @@
+use candid::Principal;
 use k256::ecdsa::{RecoveryId, Signature, VerifyingKey};
 use std::fmt;
 use tiny_keccak::{Hasher, Keccak};
@@ -300,4 +301,14 @@ pub fn convert_to_eip55(address: &str) -> Result<String, EthError> {
         .map_err(EthError::Eip55Error)?; // Convert to error type
 
     Ok(format!("0x{}", checksummed_addr))
+}
+
+///
+/// Create a message to sign to link an Ethereum address to an Internet Computer principal.
+///
+pub fn create_signing_message(address: &EthAddress, principal: &Principal) -> String {
+    format!(
+        "Sign this message to link your Ethereum address to your Internet Computer identity.\n\nEthereum address: {}\n\nInternet Computer principal: {}",
+        address.as_str(),
+        principal.to_text())
 }
