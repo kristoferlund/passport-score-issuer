@@ -7,6 +7,7 @@ use vc_util::issuer_api::{IssueCredentialError, PrepareCredentialRequest, Prepar
 async fn prepare_credential(
     _req: PrepareCredentialRequest,
 ) -> Result<PreparedCredentialData, IssueCredentialError> {
+    ic_cdk::println!("prepare_credential called");
     unimplemented!()
 }
 

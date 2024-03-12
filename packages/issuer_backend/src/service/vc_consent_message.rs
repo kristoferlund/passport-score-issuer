@@ -9,6 +9,8 @@ use crate::CREDENTIAL_TYPE;
 async fn vc_consent_message(
     req: Icrc21VcConsentMessageRequest,
 ) -> Result<Icrc21ConsentInfo, Icrc21Error> {
+    ic_cdk::println!("vc_consent_message called");
+
     if req.credential_spec.credential_type != CREDENTIAL_TYPE {
         return Err(Icrc21Error::GenericError {
             error_code: Nat::from(400u32),

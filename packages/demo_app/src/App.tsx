@@ -27,7 +27,7 @@ function App() {
           You are logged in as: {identity.getPrincipal().toText().slice(0, 5)}
           ...{identity.getPrincipal().toText().slice(-5)}
           <button onClick={startVcFlow} style={{ display: "block" }}>
-            Issue Passport
+            Get Gitcoin Passport Credential
           </button>
         </>
       ) : (
