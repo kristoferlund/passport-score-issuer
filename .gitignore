@@ -12,6 +12,7 @@
 
 # generated files
 **/declarations/
+canister_ids.json
 
 # rust
 target/

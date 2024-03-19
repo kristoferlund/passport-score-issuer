@@ -14,8 +14,8 @@ const PassportCredentialSpec = {
 
 const PassportIssuerOrigin =
   process.env.DFX_NETWORK === "local"
-    ? `http://${process.env.CANISTER_ID_issuer_backend}.localhost:4943/`
-    : `https://${process.env.CANISTER_ID_issuer_backend}.ic0.app`;
+    ? `http://${process.env.CANISTER_ID_issuer_backend}.localhost:4943`
+    : `https://${process.env.CANISTER_ID_issuer_backend}.icp0.io`;
 
 export const usePassportScore = (): PassportContextType => {
   const context = useContext(PassportContext);
@@ -31,6 +31,7 @@ export function PassportProvider({ children }: { children: ReactNode }) {
   const { identity } = useInternetIdentity();
 
   async function handleFlowFinished(evnt: MessageEvent) {
+    console.log("handleFlowFinished", evnt);
     // TODO: handle the response
   }
 
@@ -51,6 +52,8 @@ export function PassportProvider({ children }: { children: ReactNode }) {
         credentialSubject: identity?.getPrincipal().toString(),
       },
     };
+
+    console.log("postMessage", req);
 
     try {
       window.addEventListener("message", handleFlowFinished);
