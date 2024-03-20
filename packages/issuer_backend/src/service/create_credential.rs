@@ -14,6 +14,9 @@ pub async fn create_credential(signature: String, address: String) -> Result<f32
         .try_into()
         .map_err(|_| "Invalid principal".to_string())?;
 
+    ic_cdk::println!("create_credential called");
+    ic_cdk::println!("principal: {:?}", principal);
+
     // Function can only be called once per principal.
     PRINCIPAL_SCORE.with_borrow(|s| {
         if s.contains_key(&principal) {

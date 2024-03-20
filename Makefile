@@ -1,14 +1,27 @@
 create-canisters:
 	@dfx canister create --all
 
-deploy-issuer-backend:
-	@dfx deploy issuer_backend
+deploy-internet-identity:
+	@dfx deploy internet_identity
 
-deploy-issuer-frontend:
-	@dfx deploy issuer_frontend
-
-start-issuer-frontend:
-	@npm --workspace issuer_frontend run start
+deploy-issuer:
+	@npm run build --workspace issuer_frontend
+# At the time of writing dfx outputs incorrect JSON with dfx ping (commas between object
+# entries are missing).
+# In order to read the root key we grab the array from the '"root_key": [...]' bit, the brackets
+# to match what candid expects ({}), replace the commas between array entries to match
+# what candid expects (semicolon) and annotate the numbers with their type (otherwise dfx assumes 'nat'
+# instead of 'nat8').
+	$(eval export ROOT_KEY=$(shell dfx ping \
+		| sed -n 's/.*"root_key": \[\(.*\)\].*/{\1}/p' \
+		| sed 's/\([0-9][0-9]*\)/\1:nat8/g' \
+		| sed 's/,/;/g'))
+	@dfx deploy issuer_backend --argument "( \
+	    record { \
+				ic_root_key_der = vec $(ROOT_KEY); \
+				ii_canister_id = principal \"$$(dfx canister id internet_identity)\"; \
+	    } \
+	)"
 
 deploy-demo-app:
 	@dfx deploy demo_app
@@ -16,8 +29,7 @@ deploy-demo-app:
 start-demo-app:
 	@npm --workspace demo_app run start
 
-deploy-all: 
-	@dfx deploy
+deploy-all: create-canisters deploy-internet-identity deploy-issuer deploy-demo-app
 	@echo ""
 	@echo "Deployment Complete."
 	@echo ""

@@ -3,7 +3,7 @@
     "internet_identity": {
       "type": "custom",
       "candid": "https://github.com/dfinity/internet-identity/releases/download/release-2024-03-15/internet_identity.did",
-      "wasm": "https://github.com/dfinity/internet-identity/releases/download/release-2024-03-15/internet_identity_dev.wasm.gz",
+      "wasm": "https://github.com/dfinity/internet-identity/releases/download/release-2024-03-/internet_identity_dev.wasm.gz",
       "remote": {
         "id": {
           "ic": "rdmx6-jaaaa-aaaaa-aaadq-cai"
@@ -14,22 +14,13 @@
         "output": "declarations/internet_identity/"
       }
     },
-    "issuer_backend": {
+    "issuer": {
       "candid": "packages/issuer_backend/issuer_backend.did",
       "package": "issuer_backend",
       "type": "rust",
       "declarations": {
         "output": "declarations/issuer_backend"
       }
-    },
-    "issuer_frontend": {
-      "dependencies": ["issuer_backend", "internet_identity"],
-      "source": ["packages/issuer_frontend/dist"],
-      "type": "assets",
-      "declarations": {
-        "output": "declarations/issuer_frontend"
-      },
-      "workspace": "issuer_frontend"
     },
     "demo_app": {
       "dependencies": ["issuer_backend", "internet_identity"],

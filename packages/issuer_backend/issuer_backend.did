@@ -65,7 +65,6 @@ type DerivationOriginError = variant {
   UnsupportedOrigin : text;
 };
 
-
 type Score = float32;
 
 type LookupCredentialResponse = variant {
@@ -81,7 +80,31 @@ type RegisterCredentialResponse = variant {
   Err : text;
 };
 
-service: {
+type SettingsInput = record {
+  ic_root_key_der : blob;
+  ii_canister_id : principal;
+};
+
+type HeaderField = record {
+    text;
+    text;
+};
+
+type HttpRequest = record {
+    method: text;
+    url: text;
+    headers: vec HeaderField;
+    body: blob;
+    certificate_version: opt nat16;
+};
+
+type HttpResponse = record {
+    status_code: nat16;
+    headers: vec HeaderField;
+    body: blob;
+};
+
+service : (settings_input : SettingsInput) -> {
     lookup_credential: (Address) -> (LookupCredentialResponse) query;
     create_credential: (Address, Signature) -> (RegisterCredentialResponse);
 
@@ -93,4 +116,7 @@ service: {
         (variant { Ok : PreparedCredentialData; Err : IssueCredentialError;});
     get_credential : (GetCredentialRequest) ->
         (variant { Ok : IssuedCredentialData; Err : IssueCredentialError;}) query;
+
+    http_request: (request: HttpRequest) -> (HttpResponse) query;
+
 }

@@ -6,5 +6,7 @@ async fn derivation_origin(
     _req: DerivationOriginRequest,
 ) -> Result<DerivationOriginData, DerivationOriginError> {
     ic_cdk::println!("derivation_origin called");
-    unimplemented!();
+    Ok(DerivationOriginData {
+        origin: format!("https://{}.icp0.io", ic_cdk::api::id()),
+    })
 }

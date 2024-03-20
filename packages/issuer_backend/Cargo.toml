@@ -20,3 +20,7 @@ k256 = "0.13.3"
 tiny-keccak = { version = "2.0.2", features = ["keccak"] }
 hex = "0.4.3"
 serde_json = "1.0.114"
+serde = "1.0.197"
+ic-certification = "2.4.0"
+serde_bytes = "0.11.14"
+include_dir = "0.7.3"

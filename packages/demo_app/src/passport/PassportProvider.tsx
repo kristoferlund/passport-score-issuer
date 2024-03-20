@@ -14,8 +14,8 @@ const PassportCredentialSpec = {
 
 const PassportIssuerOrigin =
   process.env.DFX_NETWORK === "local"
-    ? `http://${process.env.CANISTER_ID_issuer_backend}.localhost:4943`
-    : `https://${process.env.CANISTER_ID_issuer_backend}.icp0.io`;
+    ? `http://${process.env.CANISTER_ID_ISSUER_BACKEND}.localhost:4943`
+    : `https://${process.env.CANISTER_ID_ISSUER_BACKEN}.icp0.io`;
 
 export const usePassportScore = (): PassportContextType => {
   const context = useContext(PassportContext);

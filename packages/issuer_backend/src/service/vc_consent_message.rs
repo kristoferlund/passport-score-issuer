@@ -10,6 +10,7 @@ async fn vc_consent_message(
     req: Icrc21VcConsentMessageRequest,
 ) -> Result<Icrc21ConsentInfo, Icrc21Error> {
     ic_cdk::println!("vc_consent_message called");
+    ic_cdk::println!("{:?}", req);
 
     if req.credential_spec.credential_type != CREDENTIAL_TYPE {
         return Err(Icrc21Error::GenericError {
@@ -18,9 +19,7 @@ async fn vc_consent_message(
         });
     }
 
-    if (req.preferences.language.to_lowercase() != "en")
-        && (req.preferences.language.to_lowercase() != "de")
-    {
+    if req.preferences.language != "en-US" {
         return Err(Icrc21Error::GenericError {
             error_code: Nat::from(400u32),
             description: "Unsupported language".to_string(),
@@ -28,7 +27,7 @@ async fn vc_consent_message(
     }
 
     Ok(Icrc21ConsentInfo {
-        consent_message: "consent message".to_string(),
+        consent_message: "<h1>Gitcoin Passport Score</h1>\nDo you want to share your Gitcoin Passport Score?\n\nSharing this credential DOES NOT mean revealing your Etherum address or other personal information.".to_string(),
         language: "en".to_string(),
     })
 }

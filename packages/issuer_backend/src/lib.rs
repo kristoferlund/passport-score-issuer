@@ -1,13 +1,21 @@
+mod assets;
+mod certified_data;
 mod eth;
 mod guard;
+mod http;
+mod macros;
 mod passport;
 mod service;
+mod settings;
 
+use asset_util::CertifiedAssets;
+use canister_sig_util::signature_map::SignatureMap;
 use ic_stable_structures::memory_manager::{MemoryId, MemoryManager, VirtualMemory};
 use ic_stable_structures::{DefaultMemoryImpl, StableBTreeMap};
+use settings::Settings;
 use std::cell::RefCell;
 
-const CREDENTIAL_TYPE: &str = "GitCoinPassportScore";
+const CREDENTIAL_TYPE: &str = "GitcoinPassportScore";
 
 thread_local! {
     static MEMORY_MANAGER: RefCell<MemoryManager<DefaultMemoryImpl>> =
@@ -33,5 +41,9 @@ thread_local! {
             MEMORY_MANAGER.with(|m| m.borrow().get(MemoryId::new(1))),
         )
     );
+
+    static SETTINGS: RefCell<Option<Settings>> = RefCell::new(None);
+    static SIGNATURES : RefCell<SignatureMap> = RefCell::new(SignatureMap::default());
+    static ASSETS: RefCell<CertifiedAssets> = RefCell::new(CertifiedAssets::default());
 
 }
