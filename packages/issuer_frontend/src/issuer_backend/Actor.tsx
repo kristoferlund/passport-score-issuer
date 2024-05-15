@@ -3,13 +3,10 @@ import {
   createActorContext,
   createUseActorHook,
 } from "ic-use-actor";
-import {
-  canisterId,
-  idlFactory,
-} from "../../declarations/issuer_backend/index";
+import { canisterId, idlFactory } from "../../../issuer_backend/declarations";
 
 import React from "react";
-import { _SERVICE } from "../../declarations/issuer_backend/issuer_backend.did";
+import { _SERVICE } from "../../../issuer_backend/declarations/issuer.did";
 import { useInternetIdentity } from "ic-use-internet-identity";
 
 export const actorContext = createActorContext<_SERVICE>();

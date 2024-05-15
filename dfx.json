@@ -1,34 +1,35 @@
 {
   "canisters": {
     "internet_identity": {
-      "type": "custom",
-      "candid": "https://github.com/dfinity/internet-identity/releases/download/release-2024-03-15/internet_identity.did",
-      "wasm": "https://github.com/dfinity/internet-identity/releases/download/release-2024-03-/internet_identity_dev.wasm.gz",
+      "candid": "https://github.com/dfinity/internet-identity/releases/download/release-2024-05-13/internet_identity.did",
+      "declarations": {
+        "output": "packages/internet_identity/declarations"
+      },
       "remote": {
         "id": {
           "ic": "rdmx6-jaaaa-aaaaa-aaadq-cai"
         }
       },
-      "frontend": {},
-      "declarations": {
-        "output": "declarations/internet_identity/"
-      }
+      "type": "custom",
+      "wasm": "https://github.com/dfinity/internet-identity/releases/download/release-2024-05-13/internet_identity_dev.wasm.gz"
     },
+
     "issuer": {
       "candid": "packages/issuer_backend/issuer_backend.did",
-      "package": "issuer_backend",
-      "type": "rust",
       "declarations": {
-        "output": "declarations/issuer_backend"
-      }
+        "output": "packages/issuer_backend/declarations"
+      },
+      "package": "issuer_backend",
+      "type": "rust"
     },
+
     "demo_app": {
-      "dependencies": ["issuer_backend", "internet_identity"],
+      "declarations": {
+        "output": "packages/demo_app/declarations"
+      },
+      "dependencies": ["issuer", "internet_identity"],
       "source": ["packages/demo_app/dist"],
       "type": "assets",
-      "declarations": {
-        "output": "declarations/demo_app"
-      },
       "workspace": "demo_app"
     }
   },
