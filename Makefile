@@ -18,18 +18,28 @@ deploy-issuer:
 				ii_canister_id = principal \"$$(dfx canister id internet_identity)\"; \
 	    } \
 	)"
+	@candid-extractor target/wasm32-unknown-unknown/release/issuer_backend.wasm > packages/issuer_backend/issuer_backend.did
 	@echo ""
 	@echo "Deployed issuer canister"
 	@echo ""
 	@echo "Web interface: \033[1;93mhttp://$$(dfx canister id issuer).localhost:4943\033[0m"
 
 deploy-demo-app:
+	@dfx generate issuer
+	@npm i
 	@dfx deploy demo_app
 
-start-demo-app:
+run-issuer-frontend:
+	@dfx generate issuer
+	@npm i
+	@npm --workspace issuer_frontend run start
+
+run-demo-app:
+	@dfx generate issuer
+	@npm i
 	@npm --workspace demo_app run start
 
-deploy-all: create-canisters deploy-internet-identity deploy-issuer-backend deploy-issuer-frontend deploy-demo-app
+deploy-all: create-canisters deploy-internet-identity deploy-issuer deploy-demo-app
 
 clean:
 	rm -rf .dfx

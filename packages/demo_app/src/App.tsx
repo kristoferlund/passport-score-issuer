@@ -4,7 +4,7 @@ import { usePassportScore } from "./passport/PassportProvider";
 
 function App() {
   const { identity } = useInternetIdentity();
-  const { startVcFlow } = usePassportScore();
+  const { startVcFlow, passportScore } = usePassportScore();
 
   return (
     <main
@@ -32,6 +32,12 @@ function App() {
         </>
       ) : (
         <LoginButton />
+      )}
+      {passportScore && (
+        <div>
+          <h2>Your Gitcoin Passport Score</h2>
+          <p>{passportScore}</p>
+        </div>
       )}
     </main>
   );

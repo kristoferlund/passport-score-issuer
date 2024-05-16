@@ -7,13 +7,22 @@ mod macros;
 mod passport;
 mod service;
 mod settings;
+mod vc;
 
 use asset_util::CertifiedAssets;
 use canister_sig_util::signature_map::SignatureMap;
+use http::{HttpRequest, HttpResponse};
+use ic_cdk::export_candid;
 use ic_stable_structures::memory_manager::{MemoryId, MemoryManager, VirtualMemory};
 use ic_stable_structures::{DefaultMemoryImpl, StableBTreeMap};
 use settings::Settings;
+use settings::SettingsInput;
 use std::cell::RefCell;
+use vc_util::issuer_api::{
+    DerivationOriginData, DerivationOriginError, DerivationOriginRequest, GetCredentialRequest,
+    Icrc21ConsentInfo, Icrc21Error, Icrc21VcConsentMessageRequest, IssueCredentialError,
+    IssuedCredentialData, PrepareCredentialRequest, PreparedCredentialData,
+};
 
 const CREDENTIAL_TYPE: &str = "GitcoinPassportScore";
 
@@ -47,3 +56,5 @@ thread_local! {
     static ASSETS: RefCell<CertifiedAssets> = RefCell::new(CertifiedAssets::default());
 
 }
+
+export_candid!();

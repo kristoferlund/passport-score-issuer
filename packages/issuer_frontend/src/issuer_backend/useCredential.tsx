@@ -1,17 +1,20 @@
-import { Identity } from "@dfinity/agent";
 import { useIssuerBackend } from "./Actor";
 import { useQuery } from "@tanstack/react-query";
+import { useInternetIdentity } from "ic-use-internet-identity";
 
-export const useCredential = (address?: string, identity?: Identity) => {
+export const useLookupCredential = () => {
   const { actor: issuerBackend } = useIssuerBackend();
+  const { identity } = useInternetIdentity();
   const principal = identity?.getPrincipal().toText();
+
   return useQuery({
-    queryKey: ["Credential", address, principal],
+    queryKey: ["Credential", principal],
     queryFn: async () => {
-      if (!issuerBackend || !address) return null;
-      const credential = await issuerBackend.lookup_credential(address);
+      if (!issuerBackend) return null;
+      const credential = await issuerBackend.lookup_credential();
+      console.log("credential", credential);
       return credential;
     },
-    enabled: !!issuerBackend && !!address && !!principal,
+    enabled: !!issuerBackend && !!principal,
   });
 };

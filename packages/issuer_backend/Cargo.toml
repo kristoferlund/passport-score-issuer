@@ -24,3 +24,10 @@ serde = "1.0.197"
 ic-certification = "2.4.0"
 serde_bytes = "0.11.14"
 include_dir = "0.7.3"
+identity_core = { git = "https://github.com/frederikrothenberger/identity.rs.git", branch = "frederik/wasm-test", default-features = false }
+identity_credential = { git = "https://github.com/frederikrothenberger/identity.rs.git", branch = "frederik/wasm-test", default-features = false, features = [
+    "validator",
+] }
+identity_jose = { git = "https://github.com/frederikrothenberger/identity.rs.git", branch = "frederik/wasm-test", default-features = false, features = [
+    "iccs",
+] }

@@ -1,12 +1,10 @@
 import CredentialBox from "./CredentialBox";
 import { useAccount } from "wagmi";
-import { useCredential } from "../issuer_backend/useCredential";
-import { useInternetIdentity } from "ic-use-internet-identity";
+import { useLookupCredential } from "../issuer_backend/useCredential";
 
 export default function CredentialSection() {
   const { address } = useAccount();
-  const { identity } = useInternetIdentity();
-  const { data: credentialResponse } = useCredential(address, identity);
+  const { data: credentialResponse } = useLookupCredential();
 
   return (
     <div className="col" style={{ textAlign: "center" }}>
