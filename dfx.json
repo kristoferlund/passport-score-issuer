@@ -27,7 +27,6 @@
       "declarations": {
         "output": "packages/demo_app/declarations"
       },
-      "dependencies": ["issuer", "internet_identity"],
       "source": ["packages/demo_app/dist"],
       "type": "assets",
       "workspace": "demo_app"

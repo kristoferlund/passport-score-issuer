@@ -43,16 +43,7 @@ async fn vc_consent_message(
         })?;
 
     // Construct the consent message.
-    let consent_message = format!(
-        r#"<h1>Gitcoin Passport</h1>
-
-        The relying party is requesting you to share the following credential:
-
-        Credential Type: Gitcoin Passport Score
-        Minimum Score: {min_score}
-
-        Sharing the credential DOES NOT mean revealing your exact Passport Score, Ethereum address or other personal information."#
-    );
+    let consent_message = format!("<h1>Gitcoin Passport</h1>The relying party is requesting you to share the following credential:<br/><br/>Credential Type: Gitcoin Passport Score<br/>Minimum Score: {min_score}<br/><br/>Sharing the credential DOES NOT mean revealing your exact Passport Score, Ethereum address or other personal information.");
 
     Ok(Icrc21ConsentInfo {
         consent_message,

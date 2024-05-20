@@ -18,6 +18,7 @@ deploy-issuer:
 				ii_canister_id = principal \"$$(dfx canister id internet_identity)\"; \
 	    } \
 	)"
+	@find . -name '.DS_Store' -delete
 	@candid-extractor target/wasm32-unknown-unknown/release/issuer_backend.wasm > packages/issuer_backend/issuer_backend.did
 	@echo ""
 	@echo "Deployed issuer canister"
