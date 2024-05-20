@@ -1,3 +1,5 @@
+import "./styles/window.scss";
+
 import App from "./App";
 import { InternetIdentityProvider } from "ic-use-internet-identity";
 import { PassportProvider } from "./passport/PassportProvider";

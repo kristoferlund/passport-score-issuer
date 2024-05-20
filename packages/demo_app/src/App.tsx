@@ -1,42 +1,65 @@
+import { VcFlowRequestWire, usePassportCredentialRequest } from "./vc-api";
+
+import { IcpLoginButton } from "./components/IcpLoginButton";
+import IcpPill from "./components/IcpPill";
 import { LoginButton } from "./components/LoginButton";
 import { useInternetIdentity } from "ic-use-internet-identity";
 import { usePassportScore } from "./passport/PassportProvider";
 
 function App() {
   const { identity } = useInternetIdentity();
-  const { startVcFlow, passportScore } = usePassportScore();
+  const { startVcFlow, credentials } = usePassportScore();
+
+  const passportCredentialRequest = usePassportCredentialRequest(5);
 
   return (
-    <main
-      style={{
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        gap: "20px",
-        alignItems: "center",
-        fontFamily: "sans-serif",
-      }}
-    >
+    <main className="col">
       <img
-        src="/logo.svg"
+        src="/header.svg"
         alt="The Internet Computer"
         style={{ width: "300px" }}
       />
-      {identity ? (
-        <>
-          You are logged in as: {identity.getPrincipal().toText().slice(0, 5)}
-          ...{identity.getPrincipal().toText().slice(-5)}
+      <h1>VC Flow Demo App</h1>
+      <div style={{ textAlign: "center" }}>
+        This app allows you to request a{" "}
+        <a href="https://passport.gitcoin.co">Gitcoin Passport Score</a>{" "}
+        Credential issued by the{" "}
+        <a href="https://ycons-daaaa-aaaal-qja3q-cai.icp0.io">
+          Gitcoin Passport Issuer for ICP
+        </a>
+        . This application will never have any knowledge of the Ethereum address
+        or ICP identity used to create the credential.
+      </div>
+      <div className="row">
+        <IcpPill />
+        <IcpLoginButton />
+      </div>
+
+      {identity && (
+        <div className="col">
+          <h2>Credential Request</h2>
+          <div style={{ textAlign: "center" }}>
+            We will request a credential proving that the user hasa a Passport
+            score of at least 5.
+          </div>
+          <code>
+            <pre>{JSON.stringify(passportCredentialRequest, null, 2)}</pre>
+          </code>
           <button onClick={startVcFlow} style={{ display: "block" }}>
-            Get Gitcoin Passport Credential
+            Send request
           </button>
-        </>
-      ) : (
-        <LoginButton />
+        </div>
       )}
-      {passportScore && (
-        <div>
-          <h2>Your Gitcoin Passport Score</h2>
-          <p>{passportScore}</p>
+      {credentials && (
+        <div className="col">
+          <h2>Received Credentials</h2>
+          {credentials.map((vc) => (
+            <div key={vc.exp}>
+              <code>
+                <pre>{JSON.stringify(vc, null, 2)}</pre>
+              </code>
+            </div>
+          ))}
         </div>
       )}
     </main>
