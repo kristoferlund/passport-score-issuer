@@ -22,14 +22,15 @@ function App() {
       <div style={{ textAlign: "center" }}>
         This issuer links your Ethereum address and{" "}
         <a href="https://passport.gitcoin.co">Gitcoin Passport Score</a> to your
-        ICP identity. The issued credential can be used to prove your Gitcoin
-        Passport Score to other ICP services in a secure way, without revealing
-        your Ethereum address.
+        ICP identity. Once the link has been established, this service can issue
+        verifiable credentials that prove your Gitcoin Passport Score to other
+        ICP services. This is done in a secure way, without revealing your
+        Ethereum address.
       </div>
       {!identity && !address && (
         <div style={{ textAlign: "center", fontWeight: "700" }}>
-          Login to ICP and connect to ETH to view or create a passport
-          credential.
+          Login to ICP and connect to ETH to link or refresh your Gitcoin
+          Passport score.
         </div>
       )}
 
