@@ -1,24 +1,33 @@
-use candid::{candid_method, Nat};
+use candid::Nat;
 use ic_cdk::update;
 use vc_util::issuer_api::{Icrc21ConsentInfo, Icrc21Error, Icrc21VcConsentMessageRequest};
 
-use crate::CREDENTIAL_TYPE;
+use crate::vc::{get_credential_min_score, validate_credential_spec};
 
+/// Handles the generation of a consent message for credential sharing.
+///
+/// This function validates the credential specification and the user's language preference.
+/// It then retrieves the minimum score required for the credential and generates a consent message.
+///
+/// # Arguments
+///
+/// * `req` - An `Icrc21VcConsentMessageRequest` containing the credential specification and user preferences.
+///
+/// # Returns
+///
+/// * `Ok(Icrc21ConsentInfo)` - Contains the consent message and language if successful.
+/// * `Err(Icrc21Error)` - Contains an error if validation or message creation fails.
 #[update]
-#[candid_method]
 async fn vc_consent_message(
     req: Icrc21VcConsentMessageRequest,
 ) -> Result<Icrc21ConsentInfo, Icrc21Error> {
-    ic_cdk::println!("vc_consent_message called");
-    ic_cdk::println!("{:?}", req);
+    // Validate the credential specification.
+    validate_credential_spec(&req.credential_spec).map_err(|_| Icrc21Error::GenericError {
+        error_code: Nat::from(400u32),
+        description: "Unsupported or invalid credential type".to_string(),
+    })?;
 
-    if req.credential_spec.credential_type != CREDENTIAL_TYPE {
-        return Err(Icrc21Error::GenericError {
-            error_code: Nat::from(400u32),
-            description: "Unsupported credential type".to_string(),
-        });
-    }
-
+    // Ensure the language preference is supported.
     if req.preferences.language != "en-US" {
         return Err(Icrc21Error::GenericError {
             error_code: Nat::from(400u32),
@@ -26,8 +35,27 @@ async fn vc_consent_message(
         });
     }
 
+    // Retrieve the minimum score required for the credential.
+    let min_score =
+        get_credential_min_score(&req.credential_spec).map_err(|_| Icrc21Error::GenericError {
+            error_code: Nat::from(400u32),
+            description: "minScore not found in credential type".to_string(),
+        })?;
+
+    // Construct the consent message.
+    let consent_message = format!(
+        r#"<h1>Gitcoin Passport</h1>
+
+        The relying party is requesting you to share the following credential:
+
+        Credential Type: Gitcoin Passport Score
+        Minimum Score: {min_score}
+
+        Sharing the credential DOES NOT mean revealing your exact Passport Score, Ethereum address or other personal information."#
+    );
+
     Ok(Icrc21ConsentInfo {
-        consent_message: "<h1>Gitcoin Passport Score</h1>\nDo you want to share your Gitcoin Passport Score?\n\nSharing this credential DOES NOT mean revealing your Etherum address or other personal information.".to_string(),
+        consent_message,
         language: "en".to_string(),
     })
 }

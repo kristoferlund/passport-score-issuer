@@ -8,6 +8,9 @@ use serde_json::Value;
 /// Get the Gitcoin Passport score for an Ethereum address from the Gitcoin Passport API.
 ///
 pub async fn get_passport_score(address: &EthAddress) -> Result<f32, String> {
+    // Since the Gitcoin Passport API does not accept IPv6 connections, we use a Cloudflare Worker
+    // to proxy the request to the API. Source code for the Worker can be found at
+    // https://github.com/kristoferlund/passport-score-api-proxy
     let url = format!(
         "https://passport-score-proxy.kristofer-977.workers.dev/submit/{address}",
         address = address.as_str()

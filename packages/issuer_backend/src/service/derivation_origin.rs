@@ -5,9 +5,15 @@ use vc_util::issuer_api::{DerivationOriginData, DerivationOriginError, Derivatio
 async fn derivation_origin(
     _req: DerivationOriginRequest,
 ) -> Result<DerivationOriginData, DerivationOriginError> {
-    ic_cdk::println!("derivation_origin called");
-    // origin: format!("https://{}.icp0.io", ic_cdk::api::id()),
-    let origin = format!("http://{}.localhost:4943", ic_cdk::api::id());
-    ic_cdk::println!("{}", origin.as_str());
+    let dfx_network = option_env!("DFX_NETWORK").unwrap();
+    let origin = match dfx_network {
+        "local" => format!("http://{}.localhost:4943", ic_cdk::api::id()),
+        "ic" => format!("https://{}.ic0.app", ic_cdk::api::id()),
+        _ => {
+            return Err(DerivationOriginError::Internal(
+                "Invalid DFX_NETWORK".to_string(),
+            ))
+        }
+    };
     Ok(DerivationOriginData { origin })
 }

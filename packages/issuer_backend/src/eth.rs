@@ -209,20 +209,6 @@ pub fn eip191_bytes(message: &str) -> Vec<u8> {
     format!("\x19Ethereum Signed Message:\n{}{}", message.len(), message).into_bytes()
 }
 
-/// Converts a byte array to an Ethereum address by encoding the bytes to a hexadecimal string and
-/// adding the '0x' prefix.
-///
-/// # Parameters
-///
-/// * `bytes` - The byte array to convert. Must be 20 bytes long.
-pub fn _bytes_to_eth_address(bytes: &[u8; 20]) -> String {
-    // Encode the bytes to a hexadecimal string
-    let addr = hex::encode(bytes);
-
-    // Add the '0x' prefix
-    format!("0x{}", addr)
-}
-
 /// Derives an Ethereum address from an ECDSA public key.
 ///
 /// # Parameters

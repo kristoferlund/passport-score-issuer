@@ -72,7 +72,7 @@ type SettingsInput = record {
 };
 type SignedIdAlias = record { credential_jws : text };
 service : (SettingsInput) -> {
-  create_credential : (text, text) -> (Result);
+  create_or_refresh_credential : (text, text) -> (Result);
   derivation_origin : (DerivationOriginRequest) -> (Result_1);
   get_credential : (GetCredentialRequest) -> (Result_2) query;
   http_request : (HttpRequest) -> (HttpResponse) query;

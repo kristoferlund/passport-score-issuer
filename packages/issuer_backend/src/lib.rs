@@ -1,10 +1,8 @@
-mod assets;
+mod authenticated_guard;
 mod certified_data;
 mod eth;
-mod guard;
 mod http;
-mod macros;
-mod passport;
+mod passport_score_api;
 mod service;
 mod settings;
 mod vc;

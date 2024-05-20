@@ -1,5 +1,5 @@
 use crate::{
-    assets::init_assets,
+    certified_data::init_assets,
     settings::{Settings, SettingsInput},
     SETTINGS,
 };
