@@ -34,7 +34,7 @@ export default function CredentialButton() {
       return "Refresh";
     }
     if (isCreating) return "Creating …";
-    return "Create credential";
+    return "Create link";
   };
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export default function CredentialButton() {
         onSuccess(signature) {
           createCredential({ address, signature });
         },
-      },
+      }
     );
   };
 

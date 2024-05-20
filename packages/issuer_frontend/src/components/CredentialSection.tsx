@@ -1,6 +1,6 @@
+import CredentialButton from "./CredentialButton";
 import { useAccount } from "wagmi";
 import { useLookupCredential } from "../issuer_backend/useCredential";
-import CredentialButton from "./CredentialButton";
 
 export default function CredentialSection() {
   const { address } = useAccount();
@@ -11,8 +11,8 @@ export default function CredentialSection() {
       {credentialResponse &&
         "Err" in credentialResponse &&
         !address &&
-        "This principal has not yet been issued a Gitcoin Passport credential. To issue one, connect your Ethereum wallet. "}
-      <h2>Credential – Gitcoin Passport Score</h2>
+        "This principal has not yet a linked Gitcoin Passport Score. To link, connect your Ethereum wallet. "}
+      <h2>Gitcoin Passport Score</h2>
       <div className="credential">
         {credentialResponse && "Ok" in credentialResponse ? (
           <div className="score">{credentialResponse.Ok.toFixed(2)}</div>
