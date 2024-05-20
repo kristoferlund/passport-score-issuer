@@ -1,4 +1,3 @@
-import { log } from "console";
 import { useInternetIdentity } from "ic-use-internet-identity";
 
 export function IcpLoginButton() {

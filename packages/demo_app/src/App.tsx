@@ -1,14 +1,12 @@
-import { VcFlowRequestWire, usePassportCredentialRequest } from "./vc-api";
-
 import { IcpLoginButton } from "./components/IcpLoginButton";
 import IcpPill from "./components/IcpPill";
-import { LoginButton } from "./components/LoginButton";
 import { useInternetIdentity } from "ic-use-internet-identity";
-import { usePassportScore } from "./passport/PassportProvider";
+import { usePassportCredentialRequest } from "./vc/hooks/usePassportCredentialRequest";
+import { useVcProvider } from "./vc/VcProvider";
 
 function App() {
   const { identity } = useInternetIdentity();
-  const { startVcFlow, credentials } = usePassportScore();
+  const { startVcFlow, credentials } = useVcProvider();
 
   const passportCredentialRequest = usePassportCredentialRequest(5);
 
@@ -50,7 +48,7 @@ function App() {
           </button>
         </div>
       )}
-      {credentials && (
+      {identity && credentials && (
         <div className="col">
           <h2>Received Credentials</h2>
           {credentials.map((vc) => (

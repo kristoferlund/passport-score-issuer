@@ -1,34 +1,32 @@
 import { createContext, useContext, useState } from "react";
 import { type ReactNode } from "react";
-import { PassportContextType } from "./context.type";
-import {
-  PassportIssuerOrigin,
-  VcFlowRequestWire,
-  VcFlowResponse,
-  VcVerifiableCredential,
-  VcVerifiablePresentation,
-  getPassportCredentialSpec,
-  usePassportCredentialRequest,
-} from "../vc-api";
+import { VcFlowResponse, VcVerifiablePresentation } from "./types";
 import { useInternetIdentity } from "ic-use-internet-identity";
 import { jwtDecode } from "jwt-decode";
 import { z } from "zod";
+import { VcVerifiableCredential } from "./types";
+import { usePassportCredentialRequest } from "./hooks/usePassportCredentialRequest";
 
-export const PassportContext = createContext<PassportContextType | undefined>(
+export type VcProviderContextType = {
+  startVcFlow: () => Promise<void>;
+  credentials?: VcVerifiableCredential[];
+};
+
+export const VcContext = createContext<VcProviderContextType | undefined>(
   undefined
 );
 
-export const usePassportScore = (): PassportContextType => {
-  const context = useContext(PassportContext);
+export const useVcProvider = (): VcProviderContextType => {
+  const context = useContext(VcContext);
   if (!context) {
     throw new Error(
-      "usePassportScore must be used within an InternetIdentityProvider"
+      "useVcProvider must be used within an VcProvider component."
     );
   }
   return context;
 };
 
-export function PassportProvider({ children }: { children: ReactNode }) {
+export function VcProvider({ children }: { children: ReactNode }) {
   const { identity } = useInternetIdentity();
   const [credentials, setCredentials] = useState<VcVerifiableCredential[]>();
   const passportCredentialRequest = usePassportCredentialRequest(5);
@@ -87,15 +85,13 @@ export function PassportProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <PassportContext.Provider
+    <VcContext.Provider
       value={{
         startVcFlow,
         credentials,
       }}
     >
       {children}
-    </PassportContext.Provider>
+    </VcContext.Provider>
   );
 }
-
-export * from "./context.type";
