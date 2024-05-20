@@ -11,9 +11,7 @@ export const useLookupCredential = () => {
     queryKey: ["Credential", principal],
     queryFn: async () => {
       if (!issuerBackend) return null;
-      const credential = await issuerBackend.lookup_credential();
-      console.log("credential", credential);
-      return credential;
+      return issuerBackend.lookup_credential();
     },
     enabled: !!issuerBackend && !!principal,
   });

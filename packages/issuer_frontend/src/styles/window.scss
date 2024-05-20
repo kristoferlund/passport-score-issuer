@@ -66,10 +66,12 @@ div .col {
   height: 150px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .score {
   font-size: 30px;
   font-weight: 700;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }

@@ -3,15 +3,16 @@ import { useAccount, useSignMessage } from "wagmi";
 import { Principal } from "@dfinity/principal";
 import { queryClient } from "../main";
 import toast from "react-hot-toast";
-import { useCreateCredential } from "../issuer_backend/useCreateCredential";
+import { useCreateOrRefreshCredential } from "../issuer_backend/useCreateCredential";
 import { useEffect } from "react";
 import { useInternetIdentity } from "ic-use-internet-identity";
+import { useLookupCredential } from "../issuer_backend/useCredential";
 
 function createRegisterMessage(address: `0x${string}`, principal: Principal) {
   return `Sign this message to link your Ethereum address to your Internet Computer identity.\n\nEthereum address: ${address}\n\nInternet Computer principal: ${principal.toText()}`;
 }
 
-export default function CredentialBox() {
+export default function CredentialButton() {
   const { address } = useAccount();
   const { identity } = useInternetIdentity();
   const { signMessage, isPending: isSignaturePending } = useSignMessage();
@@ -22,7 +23,19 @@ export default function CredentialBox() {
     isError,
     error,
     data,
-  } = useCreateCredential();
+  } = useCreateOrRefreshCredential();
+  const { data: credentialResponse } = useLookupCredential();
+
+  const isCreating = isSignaturePending || isCreatePending;
+
+  const buttonText = () => {
+    if (credentialResponse && "Ok" in credentialResponse) {
+      if (isCreating) return "Refreshing …";
+      return "Refresh";
+    }
+    if (isCreating) return "Creating …";
+    return "Create credential";
+  };
 
   useEffect(() => {
     if (!isSuccess) return;
@@ -48,18 +61,13 @@ export default function CredentialBox() {
         onSuccess(signature) {
           createCredential({ address, signature });
         },
-      }
+      },
     );
   };
 
-  const isCreating = isSignaturePending || isCreatePending;
-
   return (
     <div className="col">
-      <div className="score">–</div>
-      <button onClick={register}>
-        {isCreating ? "Creating …" : "Create credential"}
-      </button>
+      <button onClick={register}>{buttonText()}</button>
     </div>
   );
 }

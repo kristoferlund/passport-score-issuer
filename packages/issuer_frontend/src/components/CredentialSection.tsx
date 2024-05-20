@@ -1,6 +1,6 @@
-import CredentialBox from "./CredentialBox";
 import { useAccount } from "wagmi";
 import { useLookupCredential } from "../issuer_backend/useCredential";
+import CredentialButton from "./CredentialButton";
 
 export default function CredentialSection() {
   const { address } = useAccount();
@@ -17,8 +17,9 @@ export default function CredentialSection() {
         {credentialResponse && "Ok" in credentialResponse ? (
           <div className="score">{credentialResponse.Ok.toFixed(2)}</div>
         ) : (
-          <CredentialBox />
+          <div className="score">–</div>
         )}
+        <CredentialButton />
       </div>
     </div>
   );
