@@ -1,7 +1,3 @@
-import { ArgumentValue } from "../../../issuer_backend/declarations/issuer.did";
-import { Principal } from "@dfinity/principal";
-import { isNullish } from "@dfinity/utils";
-import { useInternetIdentity } from "ic-use-internet-identity";
 import { z } from "zod";
 
 export const VcFlowRequest = z.object({
