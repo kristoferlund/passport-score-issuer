@@ -5,4 +5,5 @@ mod http_request;
 mod init_upgrade;
 mod lookup_credential;
 mod prepare_credential;
+mod transform;
 mod vc_consent_message;

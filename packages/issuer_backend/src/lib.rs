@@ -10,6 +10,7 @@ mod vc;
 use asset_util::CertifiedAssets;
 use canister_sig_util::signature_map::SignatureMap;
 use http::{HttpRequest, HttpResponse};
+use ic_cdk::api::management_canister::http_request::TransformArgs;
 use ic_cdk::export_candid;
 use ic_stable_structures::memory_manager::{MemoryId, MemoryManager, VirtualMemory};
 use ic_stable_structures::{DefaultMemoryImpl, StableBTreeMap};

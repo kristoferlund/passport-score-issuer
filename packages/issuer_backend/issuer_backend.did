@@ -14,6 +14,7 @@ type GetCredentialRequest = record {
   prepared_context : opt blob;
   credential_spec : CredentialSpec;
 };
+type HttpHeader = record { value : text; name : text };
 type HttpRequest = record {
   url : text;
   method : text;
@@ -25,6 +26,11 @@ type HttpResponse = record {
   body : blob;
   headers : vec record { text; text };
   status_code : nat16;
+};
+type HttpResponse_1 = record {
+  status : nat;
+  body : blob;
+  headers : vec HttpHeader;
 };
 type Icrc21ConsentInfo = record { consent_message : text; language : text };
 type Icrc21ConsentPreferences = record { language : text };
@@ -71,6 +77,7 @@ type SettingsInput = record {
   ic_root_key_der : blob;
 };
 type SignedIdAlias = record { credential_jws : text };
+type TransformArgs = record { context : blob; response : HttpResponse_1 };
 service : (SettingsInput) -> {
   create_or_refresh_credential : (text, text) -> (Result);
   derivation_origin : (DerivationOriginRequest) -> (Result_1);
@@ -78,5 +85,6 @@ service : (SettingsInput) -> {
   http_request : (HttpRequest) -> (HttpResponse) query;
   lookup_credential : () -> (Result) query;
   prepare_credential : (PrepareCredentialRequest) -> (Result_3);
+  transform : (TransformArgs) -> (HttpResponse) query;
   vc_consent_message : (Icrc21VcConsentMessageRequest) -> (Result_4);
 }

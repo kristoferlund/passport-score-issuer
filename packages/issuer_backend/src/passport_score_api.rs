@@ -1,6 +1,6 @@
 use crate::eth::EthAddress;
 use ic_cdk::api::management_canister::http_request::{
-    http_request, CanisterHttpRequestArgument, HttpMethod,
+    http_request, CanisterHttpRequestArgument, HttpMethod, TransformContext,
 };
 use serde_json::Value;
 
@@ -21,11 +21,14 @@ pub async fn get_passport_score(address: &EthAddress) -> Result<f32, String> {
         method: HttpMethod::GET,
         body: None,
         max_response_bytes: None,
-        transform: None,
+        transform: Some(TransformContext::from_name(
+            "transform".to_string(),
+            serde_json::to_vec(&Vec::<u8>::new()).unwrap(),
+        )),
         headers: vec![],
     };
 
-    match http_request(request, 2_000_000_000).await {
+    match http_request(request, 30_000_000_000).await {
         Ok((response,)) => {
             // Convert the response body to a string
             let body = String::from_utf8(response.body)
