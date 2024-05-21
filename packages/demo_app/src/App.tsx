@@ -8,7 +8,7 @@ function App() {
   const { identity } = useInternetIdentity();
   const { startVcFlow, credentials } = useVcProvider();
 
-  const passportCredentialRequest = usePassportCredentialRequest(5);
+  const passportCredentialRequest = usePassportCredentialRequest(1);
 
   return (
     <main className="col">
@@ -38,7 +38,7 @@ function App() {
           <h2>Credential Request</h2>
           <div style={{ textAlign: "center" }}>
             We will request a credential proving that the user has a Passport
-            score of at least 5.
+            score of at least 1.
           </div>
           <code>
             <pre>{JSON.stringify(passportCredentialRequest, null, 2)}</pre>

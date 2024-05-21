@@ -12,14 +12,14 @@ export type VcProviderContextType = {
 };
 
 export const VcContext = createContext<VcProviderContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export const useVcProvider = (): VcProviderContextType => {
   const context = useContext(VcContext);
   if (!context) {
     throw new Error(
-      "useVcProvider must be used within an VcProvider component."
+      "useVcProvider must be used within an VcProvider component.",
     );
   }
   return context;
@@ -28,7 +28,7 @@ export const useVcProvider = (): VcProviderContextType => {
 export function VcProvider({ children }: { children: ReactNode }) {
   const { identity } = useInternetIdentity();
   const [credentials, setCredentials] = useState<VcVerifiableCredential[]>();
-  const passportCredentialRequest = usePassportCredentialRequest(5);
+  const passportCredentialRequest = usePassportCredentialRequest(1);
 
   /**
    * Handle the VC flow response and set the credentials state.
@@ -42,11 +42,11 @@ export function VcProvider({ children }: { children: ReactNode }) {
         "verifiablePresentation" in vcFlowResponse.result
       ) {
         const verifiablePresentation = VcVerifiablePresentation.parse(
-          jwtDecode(vcFlowResponse.result.verifiablePresentation)
+          jwtDecode(vcFlowResponse.result.verifiablePresentation),
         );
 
         const credentials = verifiablePresentation.vp.verifiableCredential.map(
-          (vc) => VcVerifiableCredential.parse(jwtDecode(vc))
+          (vc) => VcVerifiableCredential.parse(jwtDecode(vc)),
         );
 
         setCredentials(credentials);

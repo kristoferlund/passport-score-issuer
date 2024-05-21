@@ -219,8 +219,12 @@ pub fn create_credential_jwt(
     })?;
 
     let credential: Credential = CredentialBuilder::default()
-        .id(Url::parse("https://example.edu/credentials/3732".to_string()).unwrap())
-        .issuer(Url::parse("https://example.edu".to_string()).unwrap())
+        .id(Url::parse(format!(
+            "https://ycons-daaaa-aaaal-qja3q-cai.icp0.io/{}",
+            min_score
+        ))
+        .unwrap())
+        .issuer(Url::parse("https://ycons-daaaa-aaaal-qja3q-cai.icp0.io".to_string()).unwrap())
         .type_(credential_spec.credential_type.clone())
         .subject(subject)
         .expiration_date(expiration_timestamp)
