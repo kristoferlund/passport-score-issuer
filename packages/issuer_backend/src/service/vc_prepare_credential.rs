@@ -23,8 +23,8 @@ use vc_util::issuer_api::{IssueCredentialError, PrepareCredentialRequest, Prepar
 ///
 /// * `Ok(PreparedCredentialData)` - Contains the prepared context as a ByteBuf if successful.
 /// * `Err(IssueCredentialError)` - Contains an error if validation or credential creation fails.
-#[update]
-async fn prepare_credential(
+#[update(name = "prepare_credential")]
+async fn vc_prepare_credential(
     req: PrepareCredentialRequest,
 ) -> Result<PreparedCredentialData, IssueCredentialError> {
     let alias_tuple = get_alias_tuple(&req.signed_id_alias, &caller(), time().into())?;

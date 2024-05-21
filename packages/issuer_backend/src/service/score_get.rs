@@ -4,7 +4,7 @@ use ic_cdk::{caller, query};
 use crate::PRINCIPAL_SCORE;
 
 #[query(guard = authenticated)]
-pub fn lookup_credential() -> Result<f32, String> {
+pub fn score_get() -> Result<f32, String> {
     let caller_principal: [u8; 29] = caller().as_slice()[..29]
         .try_into()
         .map_err(|_| "Invalid principal".to_string())?;

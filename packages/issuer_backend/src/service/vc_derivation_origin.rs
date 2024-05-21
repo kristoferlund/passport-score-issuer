@@ -1,8 +1,8 @@
 use ic_cdk::update;
 use vc_util::issuer_api::{DerivationOriginData, DerivationOriginError, DerivationOriginRequest};
 
-#[update]
-async fn derivation_origin(
+#[update(name = "derivation_origin")]
+async fn vc_derivation_origin(
     _req: DerivationOriginRequest,
 ) -> Result<DerivationOriginData, DerivationOriginError> {
     let dfx_network = option_env!("DFX_NETWORK").unwrap();

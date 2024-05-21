@@ -1,7 +1,7 @@
-import { useIssuerBackend } from "./Actor";
+import { useIssuerBackend } from "../IssuerBackendProvider";
 import { useMutation } from "@tanstack/react-query";
 
-export const useCreateOrRefreshCredential = () => {
+export const useLinkScore = () => {
   const { actor: issuerBackend } = useIssuerBackend();
   return useMutation({
     mutationFn: ({
@@ -12,7 +12,7 @@ export const useCreateOrRefreshCredential = () => {
       signature: string;
     }) => {
       if (!issuerBackend) throw new Error("Issuer backend not available");
-      return issuerBackend.create_or_refresh_credential(signature, address);
+      return issuerBackend.score_link(signature, address);
     },
   });
 };

@@ -37,7 +37,7 @@ function App() {
         <div className="col">
           <h2>Credential Request</h2>
           <div style={{ textAlign: "center" }}>
-            We will request a credential proving that the user hasa a Passport
+            We will request a credential proving that the user has a Passport
             score of at least 5.
           </div>
           <code>

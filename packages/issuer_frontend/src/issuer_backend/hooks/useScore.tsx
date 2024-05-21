@@ -1,17 +1,17 @@
-import { useIssuerBackend } from "./Actor";
+import { useIssuerBackend } from "../IssuerBackendProvider";
 import { useQuery } from "@tanstack/react-query";
 import { useInternetIdentity } from "ic-use-internet-identity";
 
-export const useLookupCredential = () => {
+export const useScore = () => {
   const { actor: issuerBackend } = useIssuerBackend();
   const { identity } = useInternetIdentity();
   const principal = identity?.getPrincipal().toText();
 
   return useQuery({
-    queryKey: ["Credential", principal],
+    queryKey: ["score", principal],
     queryFn: async () => {
       if (!issuerBackend) return null;
-      return issuerBackend.lookup_credential();
+      return issuerBackend.score_get();
     },
     enabled: !!issuerBackend && !!principal,
   });

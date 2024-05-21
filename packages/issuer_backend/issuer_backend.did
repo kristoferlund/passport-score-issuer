@@ -58,19 +58,19 @@ type PrepareCredentialRequest = record {
   credential_spec : CredentialSpec;
 };
 type PreparedCredentialData = record { prepared_context : opt blob };
-type Result = variant { Ok : float32; Err : text };
-type Result_1 = variant {
+type Result = variant {
   Ok : DerivationOriginData;
   Err : DerivationOriginError;
 };
-type Result_2 = variant {
+type Result_1 = variant {
   Ok : IssuedCredentialData;
   Err : IssueCredentialError;
 };
-type Result_3 = variant {
+type Result_2 = variant {
   Ok : PreparedCredentialData;
   Err : IssueCredentialError;
 };
+type Result_3 = variant { Ok : float32; Err : text };
 type Result_4 = variant { Ok : Icrc21ConsentInfo; Err : Icrc21Error };
 type SettingsInput = record {
   ii_canister_id : principal;
@@ -79,12 +79,12 @@ type SettingsInput = record {
 type SignedIdAlias = record { credential_jws : text };
 type TransformArgs = record { context : blob; response : HttpResponse_1 };
 service : (SettingsInput) -> {
-  create_or_refresh_credential : (text, text) -> (Result);
-  derivation_origin : (DerivationOriginRequest) -> (Result_1);
-  get_credential : (GetCredentialRequest) -> (Result_2) query;
+  derivation_origin : (DerivationOriginRequest) -> (Result);
+  get_credential : (GetCredentialRequest) -> (Result_1) query;
   http_request : (HttpRequest) -> (HttpResponse) query;
-  lookup_credential : () -> (Result) query;
-  prepare_credential : (PrepareCredentialRequest) -> (Result_3);
+  prepare_credential : (PrepareCredentialRequest) -> (Result_2);
+  score_get : () -> (Result_3) query;
+  score_link : (text, text) -> (Result_3);
   transform : (TransformArgs) -> (HttpResponse) query;
   vc_consent_message : (Icrc21VcConsentMessageRequest) -> (Result_4);
 }

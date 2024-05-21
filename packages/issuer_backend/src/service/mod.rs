@@ -1,9 +1,9 @@
-mod create_credential;
-mod derivation_origin;
-mod get_credential;
 mod http_request;
 mod init_upgrade;
-mod lookup_credential;
-mod prepare_credential;
+mod score_get;
+mod score_link;
 mod transform;
 mod vc_consent_message;
+mod vc_derivation_origin;
+mod vc_get_credential;
+mod vc_prepare_credential;

@@ -4,7 +4,6 @@ import {
   createUseActorHook,
 } from "ic-use-actor";
 import { canisterId, idlFactory } from "../../../issuer_backend/declarations";
-
 import React from "react";
 import { _SERVICE } from "../../../issuer_backend/declarations/issuer.did";
 import { useInternetIdentity } from "ic-use-internet-identity";

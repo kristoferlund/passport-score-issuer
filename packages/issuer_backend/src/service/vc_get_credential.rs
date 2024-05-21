@@ -18,8 +18,10 @@ use vc_util::issuer_api::{GetCredentialRequest, IssueCredentialError, IssuedCred
 ///
 /// * `Ok(IssuedCredentialData)` - Contains the JWS of the credential if successful.
 /// * `Err(IssueCredentialError)` - If validation or any step in the process fails.
-#[query]
-fn get_credential(req: GetCredentialRequest) -> Result<IssuedCredentialData, IssueCredentialError> {
+#[query(name = "get_credential")]
+fn vc_get_credential(
+    req: GetCredentialRequest,
+) -> Result<IssuedCredentialData, IssueCredentialError> {
     let alias_tuple = get_alias_tuple(&req.signed_id_alias, &caller(), time().into())?;
 
     validate_credential_spec(&req.credential_spec)?;

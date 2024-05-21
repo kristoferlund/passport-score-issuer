@@ -4,10 +4,10 @@ use crate::passport_score_api::get_passport_score;
 use crate::{ETH_PRINCIPAL, PRINCIPAL_SCORE};
 use ic_cdk::{caller, update};
 
-/// Creates or refreshes a credential for a given Ethereum address, ensuring the address is authenticated and unique.
+/// Links an Ethereum address to a principal and a passport score.
 ///
 /// The function performs several validations:
-/// 1. Ensures the principal and address are not registered for a new credential.
+/// 1. Ensures the principal and address are not already registered.
 /// 2. Validates the Ethereum address and signature.
 /// 3. Verifies the recovered address from the signature matches the provided address.
 /// 4. Fetches the passport score for the address.
@@ -23,10 +23,7 @@ use ic_cdk::{caller, update};
 /// * `Ok(f32)` - The passport score if registration or refresh is successful.
 /// * `Err(String)` - An error message if any validation or operation fails.
 #[update(guard = authenticated)]
-pub async fn create_or_refresh_credential(
-    signature: String,
-    address: String,
-) -> Result<f32, String> {
+pub async fn score_link(signature: String, address: String) -> Result<f32, String> {
     let caller_principal: [u8; 29] = caller().as_slice()[..29]
         .try_into()
         .map_err(|_| "Invalid principal".to_string())?;

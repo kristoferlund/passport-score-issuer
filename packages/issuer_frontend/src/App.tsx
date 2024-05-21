@@ -1,4 +1,3 @@
-import CredentialSection from "./components/CredentialSection";
 import { EthLoginButton } from "./components/EthLoginButton";
 import EthPill from "./components/EthPill";
 import { IcpLoginButton } from "./components/IcpLoginButton";
@@ -6,6 +5,7 @@ import IcpPill from "./components/IcpPill";
 import { Toaster } from "react-hot-toast";
 import { useAccount } from "wagmi";
 import { useInternetIdentity } from "ic-use-internet-identity";
+import ScoreSection from "./components/ScoreSection";
 
 function App() {
   const { identity } = useInternetIdentity();
@@ -42,7 +42,7 @@ function App() {
         <EthPill />
         <EthLoginButton />
       </div>
-      {identity && address && <CredentialSection />}
+      {identity && address && <ScoreSection />}
       <Toaster />
     </main>
   );
