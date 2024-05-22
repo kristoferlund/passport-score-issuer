@@ -7,12 +7,14 @@ export function IcpLoginButton() {
   if (isInitializing) return null;
 
   const disabled = loginStatus === "logging-in" || loginStatus === "success";
-  const text = loginStatus === "logging-in" ? "Logging in..." : "Login ICP";
+  const text =
+    loginStatus === "logging-in" ? "Authenticating..." : "Authenticate";
 
   if (identity) return <button onClick={clear}>Logout ICP</button>;
 
   return (
     <button onClick={login} disabled={disabled}>
+      <img src="/ic.svg" />
       {text}
     </button>
   );

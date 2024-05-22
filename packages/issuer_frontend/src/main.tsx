@@ -1,4 +1,4 @@
-import "./styles/window.scss";
+import "./styles.scss";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createConfig, http } from "wagmi";

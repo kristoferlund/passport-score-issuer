@@ -1,4 +1,4 @@
-import "./styles/window.scss";
+import "./styles.scss";
 
 import App from "./App";
 import { InternetIdentityProvider } from "ic-use-internet-identity";
@@ -13,5 +13,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <App />
       </VcProvider>
     </InternetIdentityProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

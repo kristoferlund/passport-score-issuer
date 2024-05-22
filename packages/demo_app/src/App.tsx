@@ -1,14 +1,16 @@
 import { IcpLoginButton } from "./components/IcpLoginButton";
-import IcpPill from "./components/IcpPill";
 import { useInternetIdentity } from "ic-use-internet-identity";
 import { usePassportCredentialRequest } from "./vc/hooks/usePassportCredentialRequest";
 import { useVcProvider } from "./vc/VcProvider";
+import ChainButton from "./components/ChainButton";
 
 function App() {
-  const { identity } = useInternetIdentity();
+  const { identity, clear } = useInternetIdentity();
   const { startVcFlow, credentials } = useVcProvider();
 
   const passportCredentialRequest = usePassportCredentialRequest(1);
+
+  const principal = identity?.getPrincipal();
 
   return (
     <main className="col">
@@ -23,14 +25,18 @@ function App() {
         <a href="https://passport.gitcoin.co">Gitcoin Passport Score</a>{" "}
         Credential issued by the{" "}
         <a href="https://ycons-daaaa-aaaal-qja3q-cai.icp0.io">
-          Gitcoin Passport Issuer for ICP
+          Gitcoin Passport Issuer for IC
         </a>
         . This application will never have any knowledge of the Ethereum address
         or ICP identity used to create the credential.
       </div>
-      <div className="row">
-        <IcpPill />
-        <IcpLoginButton />
+      <div className="row" style={{ width: "170px" }}>
+        {identity && principal && (
+          <ChainButton img="/ic.svg" disconnect={clear}>
+            {principal.toText().slice(0, 5)}...{principal.toText().slice(-5)}
+          </ChainButton>
+        )}
+        {!identity && <IcpLoginButton />}
       </div>
 
       {identity && (
@@ -43,7 +49,10 @@ function App() {
           <code>
             <pre>{JSON.stringify(passportCredentialRequest, null, 2)}</pre>
           </code>
-          <button onClick={startVcFlow} style={{ display: "block" }}>
+          <button
+            onClick={startVcFlow}
+            style={{ display: "block", width: "170px" }}
+          >
             Send request
           </button>
         </div>
@@ -60,6 +69,24 @@ function App() {
           ))}
         </div>
       )}
+      <div className="links">
+        <a
+          href="https://github.com/kristoferlund/passport-score-issuer"
+          target="_blank"
+        >
+          <img src="https://img.shields.io/github/license/kristoferlund/passport-score-issuer" />
+        </a>
+
+        <a
+          href="https://github.com/kristoferlund/passport-score-issuer"
+          target="_blank"
+        >
+          <img src="https://img.shields.io/github/stars/kristoferlund/passport-score-issuer" />
+        </a>
+        <a href="https://github.com/kristoferlund" target="_blank">
+          <img src="https://img.shields.io/github/followers/kristoferlund" />
+        </a>
+      </div>
     </main>
   );
 }

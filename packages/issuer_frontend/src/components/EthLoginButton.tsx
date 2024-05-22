@@ -13,7 +13,8 @@ export function EthLoginButton() {
 
   return (
     <button onClick={() => connect({ connector: injected() })}>
-      Connect ETH
+      <img src="/eth.svg" alt="ETH" />
+      Connect wallet
     </button>
   );
 }

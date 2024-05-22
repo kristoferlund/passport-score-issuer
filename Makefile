@@ -1,6 +1,16 @@
 create-canisters:
 	@dfx canister create --all
 
+build-demo-app:
+	@dfx generate issuer
+	@npm i
+	@npm run build --workspace demo_app
+
+build-issuer-frontend:
+	@dfx generate issuer
+	@npm i
+	@npm run build --workspace issuer_frontend
+
 deploy-internet-identity:
 	@dfx deploy internet_identity
 

@@ -8,7 +8,7 @@ export default function IcpPill() {
   if (!principal) return null;
 
   return (
-    <div className="pill">
+    <div className="chain-button">
       {principal.toText().slice(0, 5)}...{principal.toText().slice(-5)}
     </div>
   );

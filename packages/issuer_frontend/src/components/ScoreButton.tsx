@@ -36,8 +36,8 @@ export default function ScoreButton() {
       if (isCreating) return "Refreshing …";
       return "Refresh";
     }
-    if (isCreating) return "Creating …";
-    return "Create link";
+    if (isCreating) return "Loading …";
+    return "Load score";
   };
 
   useEffect(() => {
@@ -73,7 +73,9 @@ export default function ScoreButton() {
 
   return (
     <div className="col">
-      <button onClick={register}>{buttonText()}</button>
+      <button onClick={register} disabled={!address}>
+        {buttonText()}
+      </button>
     </div>
   );
 }
