@@ -1,3 +1,3 @@
 [workspace]
-members = ["packages/issuer_backend"]
+members = ["packages/issuer_backend", "packages/demo_app_backend"]
 resolver = "2"

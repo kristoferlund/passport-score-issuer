@@ -1,0 +1,19 @@
+type HttpRequest = record {
+  url : text;
+  method : text;
+  body : blob;
+  headers : vec record { text; text };
+  certificate_version : opt nat16;
+};
+type HttpResponse = record {
+  body : blob;
+  headers : vec record { text; text };
+  status_code : nat16;
+};
+type SettingsInput = record {
+  ii_canister_id : principal;
+  ic_root_key_der : blob;
+};
+service : (SettingsInput) -> {
+  http_request : (HttpRequest) -> (HttpResponse) query;
+}

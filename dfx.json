@@ -24,12 +24,12 @@
     },
 
     "demo_app": {
+      "candid": "packages/demo_app_backend/demo_app_backend.did",
       "declarations": {
-        "output": "packages/demo_app/declarations"
+        "output": "packages/demo_app_backend/declarations"
       },
-      "source": ["packages/demo_app/dist"],
-      "type": "assets",
-      "workspace": "demo_app"
+      "package": "demo_app_backend",
+      "type": "rust"
     }
   },
   "defaults": {
