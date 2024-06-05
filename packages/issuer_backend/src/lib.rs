@@ -50,7 +50,7 @@ thread_local! {
         )
     );
 
-    static SETTINGS: RefCell<Option<Settings>> = RefCell::new(None);
+    static SETTINGS: RefCell<Option<Settings>> = const { RefCell::new(None) };
     static SIGNATURES : RefCell<SignatureMap> = RefCell::new(SignatureMap::default());
     static ASSETS: RefCell<CertifiedAssets> = RefCell::new(CertifiedAssets::default());
 

@@ -224,7 +224,7 @@ pub fn create_credential_jwt(
             min_score
         ))
         .unwrap())
-        .issuer(Url::parse("https://ycons-daaaa-aaaal-qja3q-cai.icp0.io".to_string()).unwrap())
+        .issuer(Url::parse("https://ycons-daaaa-aaaal-qja3q-cai.icp0.io").unwrap())
         .type_(credential_spec.credential_type.clone())
         .subject(subject)
         .expiration_date(expiration_timestamp)
