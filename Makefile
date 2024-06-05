@@ -43,6 +43,7 @@ deploy-demo-app:
 	    record { \
 				ic_root_key_der = vec $(ROOT_KEY); \
 				ii_canister_id = principal \"$$(dfx canister id internet_identity)\"; \
+				issuer_canister_id = principal \"$$(dfx canister id issuer)\"; \
 	    } \
 	)"
 	@find . -name '.DS_Store' -delete

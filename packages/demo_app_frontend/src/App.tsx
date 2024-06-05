@@ -1,16 +1,38 @@
+import ChainButton from "./components/ChainButton";
 import { IcpLoginButton } from "./components/IcpLoginButton";
+import { useDemoAppBackend } from "./demo_app_backend/DemoAppBackendProvider";
 import { useInternetIdentity } from "ic-use-internet-identity";
 import { usePassportCredentialRequest } from "./vc/hooks/usePassportCredentialRequest";
+import { useState } from "react";
 import { useVcProvider } from "./vc/VcProvider";
-import ChainButton from "./components/ChainButton";
 
 function App() {
   const { identity, clear } = useInternetIdentity();
-  const { startVcFlow, credentials } = useVcProvider();
+  const { startVcFlow, credentials, vcFlowResponse } = useVcProvider();
 
   const passportCredentialRequest = usePassportCredentialRequest(1);
+  const { actor: demoAppBackendActor } = useDemoAppBackend();
+  const [doSomethingResponse, setDoSomethingResponse] = useState<string>();
 
   const principal = identity?.getPrincipal();
+
+  const callDoSomethingWithVc = async () => {
+    if (!demoAppBackendActor) return "Not connected to demo app backend";
+
+    if (!vcFlowResponse?.result) return "No VC flow response available";
+
+    if (!("verifiablePresentation" in vcFlowResponse.result))
+      return "VC flow response does not contain a verifiablePresentation";
+
+    return demoAppBackendActor.do_something(
+      vcFlowResponse.result.verifiablePresentation
+    );
+  };
+
+  const callDemoAppBackendWithVc = async () => {
+    const response = await callDoSomethingWithVc();
+    setDoSomethingResponse(response);
+  };
 
   return (
     <main className="col">
@@ -57,17 +79,32 @@ function App() {
           </button>
         </div>
       )}
-      {identity && credentials && (
-        <div className="col">
-          <h2>Received Credentials</h2>
-          {credentials.map((vc) => (
-            <div key={vc.exp}>
+      {identity && credentials && vcFlowResponse && (
+        <>
+          <div className="col">
+            <h2>Received Credentials</h2>
+            {credentials.map((vc) => (
+              <div key={vc.exp}>
+                <code>
+                  <pre>{JSON.stringify(vc, null, 2)}</pre>
+                </code>
+              </div>
+            ))}
+          </div>
+          <button
+            onClick={callDemoAppBackendWithVc}
+            style={{ display: "block", width: "170px" }}
+          >
+            Validate credential
+          </button>
+          {doSomethingResponse && (
+            <div className="col">
               <code>
-                <pre>{JSON.stringify(vc, null, 2)}</pre>
+                <pre>{doSomethingResponse}</pre>
               </code>
             </div>
-          ))}
-        </div>
+          )}
+        </>
       )}
       <div className="links">
         <a

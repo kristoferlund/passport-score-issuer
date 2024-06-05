@@ -34,6 +34,7 @@ export const VcFlowResponse = z.object({
       })
     ),
 });
+export type VcFlowResponse = z.infer<typeof VcFlowResponse>;
 
 export const VcVerifiablePresentation = z.object({
   iss: z.string(),

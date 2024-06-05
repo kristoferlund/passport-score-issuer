@@ -15,12 +15,6 @@ process.env.II_URL =
 export default defineConfig({
   build: {
     emptyOutDir: true,
-    rollupOptions: {
-      external: [
-        "@safe-window/safe-apps-provider",
-        "@safe-window/safe-apps-sdk",
-      ],
-    },
   },
   optimizeDeps: {
     esbuildOptions: {

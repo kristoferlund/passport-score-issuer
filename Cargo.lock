@@ -574,6 +574,7 @@ dependencies = [
  "include_dir",
  "serde",
  "serde_bytes",
+ "vc_util",
 ]
 
 [[package]]

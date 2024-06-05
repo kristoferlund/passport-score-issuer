@@ -21,8 +21,9 @@ fn upgrade(settings_input: SettingsInput) {
 fn save_settings(settings_input: SettingsInput) {
     SETTINGS.with_borrow_mut(|settings| {
         *settings = Some(Settings {
-            ii_canister_id: settings_input.ii_canister_id,
             ic_root_key_raw: extract_raw_root_pk_from_der(&settings_input.ic_root_key_der).unwrap(),
+            ii_canister_id: settings_input.ii_canister_id,
+            issuer_canister_id: settings_input.issuer_canister_id,
         });
     });
 }

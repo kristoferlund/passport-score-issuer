@@ -11,6 +11,7 @@ candid = "0.10"
 ic-cdk = "0.13.1"
 canister_sig_util = { git = "https://github.com/dfinity/internet-identity.git" }
 asset_util = { git = "https://github.com/dfinity/internet-identity.git" }
+vc_util = { git = "https://github.com/dfinity/internet-identity.git" }
 serde = "1.0.197"
 ic-certification = "2.4.0"
 serde_bytes = "0.11.14"

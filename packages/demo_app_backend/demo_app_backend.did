@@ -13,7 +13,9 @@ type HttpResponse = record {
 type SettingsInput = record {
   ii_canister_id : principal;
   ic_root_key_der : blob;
+  issuer_canister_id : principal;
 };
 service : (SettingsInput) -> {
+  do_something : (text) -> (text) query;
   http_request : (HttpRequest) -> (HttpResponse) query;
 }

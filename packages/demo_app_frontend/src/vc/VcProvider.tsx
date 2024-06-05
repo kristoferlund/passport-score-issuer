@@ -9,6 +9,7 @@ import { usePassportCredentialRequest } from "./hooks/usePassportCredentialReque
 export type VcProviderContextType = {
   startVcFlow: () => Promise<void>;
   credentials?: VcVerifiableCredential[];
+  vcFlowResponse?: VcFlowResponse;
 };
 
 export const VcContext = createContext<VcProviderContextType | undefined>(
@@ -28,6 +29,7 @@ export const useVcProvider = (): VcProviderContextType => {
 export function VcProvider({ children }: { children: ReactNode }) {
   const { identity } = useInternetIdentity();
   const [credentials, setCredentials] = useState<VcVerifiableCredential[]>();
+  const [vcFlowResponse, setVcFlowResponse] = useState<VcFlowResponse>();
   const passportCredentialRequest = usePassportCredentialRequest(1);
 
   /**
@@ -36,6 +38,7 @@ export function VcProvider({ children }: { children: ReactNode }) {
   async function handleFlowFinished(event: MessageEvent) {
     try {
       const vcFlowResponse = VcFlowResponse.parse(event.data);
+      setVcFlowResponse(vcFlowResponse);
 
       if (
         vcFlowResponse.result &&
@@ -97,6 +100,7 @@ export function VcProvider({ children }: { children: ReactNode }) {
       value={{
         startVcFlow,
         credentials,
+        vcFlowResponse,
       }}
     >
       {children}
