@@ -2,15 +2,22 @@
 
 This project demos the use of [verifiable credentials](https://internetcomputer.org/docs/current/developer-docs/identity/verifiable-credentials/overview) on the [Internet Computer](https://internetcomputer.org/). It uses [Gitcoin Passport](https://passport.gitcoin.co) as an example source of verifiable credentials.
 
-**About Gitcoin Passport:** *Passport helps you collect “stamps” that prove your humanity and reputation.* The more stamps you collect, the higher your reputation. Passport scores are accessible through an API provided by Gitcoin can also be minted as "attestations" on Ethereum. Up until now, the passport score is a credential that has not been available on IC.
+Verifiable credentials is allows organizations and individuals to create and share their identities and claims securely. Support for verifiable credentials was recently introduced to the identity layer of the Internet Computer (IC), enabling developers to issue and verify credentials on the IC platform. 
 
-The project consists of three main packages:
+## About Gitcoin Passport
+> *Passport helps you collect “stamps” that prove your humanity and reputation.* 
 
-## 1. [`issuer_backend`](./packages/issuer_backend)
+The more stamps you collect, the higher your reputation. Passport scores are accessible through an API provided by Gitcoin can also be minted as "attestations" on Ethereum. Up until now, the passport score is a credential that has not been available on IC.
+
+### Project Structure
+
+The project consists of four main packages, two Rust based backend canisters and two frontend canisters built using React.
+
+### 1. [`issuer_backend`](./packages/issuer_backend)
 
 Stores the link between Gitcoin Passport and II account and issues verifiable credentials to prove the Gitcoin Passport Score.
 
-## 2. [`issuer_frontend`](./packages/issuer_frontend)
+### 2. [`issuer_frontend`](./packages/issuer_frontend)
 
 ![https://ycons-daaaa-aaaal-qja3q-cai.icp0.io](media/issuer.png)
 
@@ -18,7 +25,11 @@ In this interface, the user logs in with their Ethereum address and II credentia
 
 Try it out: https://ycons-daaaa-aaaal-qja3q-cai.icp0.io
 
-### 3. [`demo_app`](./packages/demo_app)
+### 3. [`demo_app_backend`](./packages/demo_app_backend)
+
+Provides an endpoint called `do_something` that requires the user to prove their Gitcoin Passport Score. The endpoint returns a string that is the result of the verifiable credential verification.
+
+### 3. [`demo_app_frontend`](./packages/demo_app_backend)
 
 ![https://jzi4k-7qaaa-aaaal-qdncq-cai.icp0.io](media/demo.png)
 
