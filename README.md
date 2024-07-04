@@ -39,6 +39,8 @@ Try it out: https://jzi4k-7qaaa-aaaal-qdncq-cai.icp0.io
 
 ## Run locally
 
+Before you get started, make sure you have `dfx` installed. You can find instructions on how to install `dfx` [here](https://internetcomputer.org/docs/current/developer-docs/build/install-upgrade-remove).
+
 ### 1. Start the local replica
 
 ```bash
@@ -53,7 +55,14 @@ make deploy-all
 
 ## How does all this work?
 
-I am writing an article that will be out soon. In the mean time, check out the source code and see the information provided by IC: [How verifiable credentials on IC works](https://internetcomputer.org/docs/current/developer-docs/identity/verifiable-credentials/how-it-works)
+I published an article that provides a more detailed explanation of how verifiable credentials work on the IC. It also includes a walkthrough of the demo app:
+
+### 👀 [Bring the Gitcoin Passport score to the Internet Computer](https://kristoferlund.se/blog/240703-verifiable-credentials)
+
+Also, check out the developer documentation provided by IC:
+
+### 👀 [Verifiable credentials overview](https://internetcomputer.org/docs/current/developer-docs/identity/verifiable-credentials/overview)
+
 
 ## Author
 
